@@ -1,0 +1,67 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>Test</groupId>
+  <artifactId>Test</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  
+  <properties>
+  <jasperreports.version>6.3.1</jasperreports.version>
+  <groovy.version>1.8.6</groovy.version>
+</properties>
+
+<dependencies>
+    <dependency>
+        <groupId>net.sf.jasperreports</groupId>
+        <artifactId>jasperreports</artifactId>
+        <version>${jasperreports.version}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+          </exclusion>
+        </exclusions>
+    </dependency>
+</dependencies>
+
+  
+  <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jasperreports-maven-plugin</artifactId>
+                <version>1.0-beta-2</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile-reports</goal>
+                        </goals>
+                        <configuration>
+                            <!--  jrxml file  directory-->
+                            <sourceDirectory>src\\main\\resource</sourceDirectory>
+                            <sourceFileExt>.jrxml</sourceFileExt>
+                            <compiler>net.sf.jasperreports.engine.design.JRJavacCompiler</compiler>
+                            <!--  Destination for jasper file -->
+                            <outputDirectory>src\\main\\resource</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <!-- These plugins are used to specify correct version for jrxml xml validation -->
+                    <dependency>
+                        <groupId>net.sf.jasperreports</groupId>
+                        <artifactId>jasperreports</artifactId>
+                        <version>6.3.1</version>
+                    </dependency>
+                    
+                    <dependency>
+                        <groupId>log4j</groupId>
+                        <artifactId>log4j</artifactId>
+                        <version>1.2.16</version>
+                    </dependency>
+        
+                </dependencies>
+            </plugin>
+
+        </plugins>
+    </build>
+</project>
